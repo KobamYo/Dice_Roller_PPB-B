@@ -25,13 +25,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.dicerollerapplication.ui.theme.DiceRollerApplicationTheme
+import com.example.dicerollerppb_b.R
+import com.example.dicerollerppb_b.ui.theme.DiceRollerPPBBTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            DiceRollerApplicationTheme {
+            DiceRollerPPBBTheme {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -44,6 +45,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Preview
 @Composable
 fun DiceRollerApp() {
@@ -55,8 +57,8 @@ fun DiceRollerApp() {
 
 @Composable
 fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
-    var result by remember { mutableStateOf(1) }
-    val imageResource = when (result) {
+    var result by remember { mutableStateOf( 1) }
+    val imageResource = when(result) {
         1 -> R.drawable.dice_1
         2 -> R.drawable.dice_2
         3 -> R.drawable.dice_3
@@ -64,22 +66,13 @@ fun DiceWithButtonAndImage(modifier: Modifier = Modifier) {
         5 -> R.drawable.dice_5
         else -> R.drawable.dice_6
     }
-    Column (
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Image(
-            painter = painterResource(id = imageResource),
-            contentDescription = result.toString()
-        )
-        Spacer(modifier = Modifier.height(20.dp))
-        Button(onClick = { result = (1..6).random() }) {
-            Text(stringResource(id = R.string.roll))
+    Column(modifier = modifier, horizontalAlignment = Alignment.CenterHorizontally) {
+        Image(painter = painterResource(imageResource), contentDescription = result.toString())
+
+        Button(
+            onClick = { result = (1..6).random() },
+        ) {
+            Text(text = stringResource(R.string.roll), fontSize = 24.sp)
         }
-        Spacer(modifier = Modifier.height(20.dp))
-        Text(
-            text = "by Muhammad Lintang Panjerino",
-            fontSize = 20.sp
-        )
     }
 }
